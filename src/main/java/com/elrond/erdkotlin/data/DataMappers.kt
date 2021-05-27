@@ -11,6 +11,9 @@ import com.elrond.erdkotlin.domain.transaction.models.TransactionInfo
 import com.elrond.erdkotlin.domain.transaction.models.TransactionOnNetwork
 import com.elrond.erdkotlin.domain.vm.SmartContractOutput
 import com.elrond.erdkotlin.domain.wallet.models.Address
+import com.elrond.erdkotlin.utils.toHexString
+import org.bouncycastle.util.encoders.Base64
+import java.math.BigInteger
 
 internal fun GetAccountResponse.AccountData.toDomain(address: Address) = Account(
     address = address,
@@ -70,7 +73,16 @@ internal fun GetTransactionInfoResponse.TransactionInfoData.toDomain() = Transac
 )
 
 internal fun QueryContractResponse.Data.toDomain() = SmartContractOutput(
-    returnData = returnData,
+    returnData = returnData?.map { base64 ->
+        val bytes = Base64.decode(base64)
+        val asHex = bytes.toHexString()
+        SmartContractOutput.ReturnData(
+            asBase64 = base64,
+            asString = String(bytes),
+            asHex = asHex,
+            asBigInt = BigInteger(asHex.ifEmpty { "0" }, 16)
+        )
+    },
     returnCode = returnCode,
     returnMessage = returnMessage,
     gasRemaining = gasRemaining,
