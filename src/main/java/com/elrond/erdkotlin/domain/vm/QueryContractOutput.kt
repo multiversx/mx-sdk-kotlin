@@ -3,7 +3,7 @@ package com.elrond.erdkotlin.domain.vm
 import com.google.gson.internal.LinkedTreeMap
 import java.math.BigInteger
 
-data class SmartContractOutput(
+data class QueryContractOutput(
     val returnData: List<ReturnData>?,
     val returnCode: String,
     val returnMessage: String?,

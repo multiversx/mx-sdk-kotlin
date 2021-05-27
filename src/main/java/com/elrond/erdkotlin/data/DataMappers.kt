@@ -9,7 +9,7 @@ import com.elrond.erdkotlin.domain.networkconfig.models.NetworkConfig
 import com.elrond.erdkotlin.domain.account.models.Account
 import com.elrond.erdkotlin.domain.transaction.models.TransactionInfo
 import com.elrond.erdkotlin.domain.transaction.models.TransactionOnNetwork
-import com.elrond.erdkotlin.domain.vm.SmartContractOutput
+import com.elrond.erdkotlin.domain.vm.QueryContractOutput
 import com.elrond.erdkotlin.domain.wallet.models.Address
 import com.elrond.erdkotlin.utils.toHexString
 import org.bouncycastle.util.encoders.Base64
@@ -72,11 +72,11 @@ internal fun GetTransactionInfoResponse.TransactionInfoData.toDomain() = Transac
     hyperblockNonce = hyperblockNonce
 )
 
-internal fun QueryContractResponse.Data.toDomain() = SmartContractOutput(
+internal fun QueryContractResponse.Data.toDomain() = QueryContractOutput(
     returnData = returnData?.map { base64 ->
         val bytes = Base64.decode(base64)
         val asHex = bytes.toHexString()
-        SmartContractOutput.ReturnData(
+        QueryContractOutput.ReturnData(
             asBase64 = base64,
             asString = String(bytes),
             asHex = asHex,

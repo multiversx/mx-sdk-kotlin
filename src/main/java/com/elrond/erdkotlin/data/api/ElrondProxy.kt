@@ -9,7 +9,7 @@ import com.elrond.erdkotlin.data.transaction.responses.EstimateCostOfTransaction
 import com.elrond.erdkotlin.data.transaction.responses.GetTransactionInfoResponse
 import com.elrond.erdkotlin.data.transaction.responses.GetTransactionStatusResponse
 import com.elrond.erdkotlin.data.transaction.responses.SendTransactionResponse
-import com.elrond.erdkotlin.domain.vm.SmartContractQuery
+import com.elrond.erdkotlin.domain.vm.QueryContractInput
 import com.elrond.erdkotlin.data.vm.responses.QueryContractResponse
 import com.elrond.erdkotlin.domain.transaction.models.Transaction
 import com.elrond.erdkotlin.domain.wallet.models.Address
@@ -80,8 +80,8 @@ internal class ElrondProxy(
     // VM
 
     // Compute Output of Pure Function
-    fun queryContract(smartContractQuery: SmartContractQuery): ElrondClient.ResponseBase<QueryContractResponse> {
-        return elrondClient.doPost("vm-values/query", gson.toJson(smartContractQuery))
+    fun queryContract(queryContractInput: QueryContractInput): ElrondClient.ResponseBase<QueryContractResponse> {
+        return elrondClient.doPost("vm-values/query", gson.toJson(queryContractInput))
     }
 
 }
