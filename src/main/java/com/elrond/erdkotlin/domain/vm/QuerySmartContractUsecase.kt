@@ -7,15 +7,15 @@ class QuerySmartContractUsecase internal constructor(
 ) {
 
     fun execute(
-        address: Address,
-        function: String,
+        contractAddress: Address,
+        funcName: String,
         args: List<String> = emptyList(),
         caller: String? = null,
         value: String? = null
     ): SmartContractOutput {
         val payload = SmartContractQuery(
-            scAddress = address.bech32(),
-            funcName = function,
+            scAddress = contractAddress.bech32(),
+            funcName = funcName,
             args = args,
             caller = caller,
             value = value

@@ -4,13 +4,20 @@ import com.google.gson.internal.LinkedTreeMap
 import java.math.BigInteger
 
 data class SmartContractOutput(
-    val returnData: List<String>?,
+    val returnData: List<ReturnData>?,
     val returnCode: String,
     val returnMessage: String?,
     val gasRemaining: BigInteger,
     val gasRefund: BigInteger,
-    val outputAccounts: LinkedTreeMap<String, OutputAccount>
+    val outputAccounts: LinkedTreeMap<String, OutputAccount>?
 ) {
+    data class ReturnData(
+        val asBase64: String,
+        val asString: String,
+        val asHex: String,
+        val asBigInt: BigInteger
+    )
+
     data class OutputAccount(
         val address: String,
         val nonce: Long,
