@@ -1,6 +1,6 @@
 package com.elrond.erdkotlin.domain.vm
 
-data class SmartContractQuery(
+data class QueryContractInput(
     val scAddress: String,
     val funcName: String,
     val args: List<String>,

@@ -1,11 +1,11 @@
 package com.elrond.erdkotlin.domain.dns
 
-import com.elrond.erdkotlin.domain.vm.QuerySmartContractUsecase
+import com.elrond.erdkotlin.domain.vm.QueryContractUsecase
 import com.elrond.erdkotlin.domain.wallet.models.Address
 import java.math.BigInteger
 
 class GetDnsRegistrationCostUsecase internal constructor(
-    private val queryContractUsecase: QuerySmartContractUsecase,
+    private val queryContractUsecase: QueryContractUsecase,
     private val computeDnsAddressUsecase: ComputeDnsAddressUsecase
 ) {
 

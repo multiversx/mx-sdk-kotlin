@@ -2,7 +2,7 @@ package com.elrond.erdkotlin.domain.vm
 
 import com.elrond.erdkotlin.domain.wallet.models.Address
 
-class QuerySmartContractUsecase internal constructor(
+class QueryContractUsecase internal constructor(
     private val vmRepository: VmRepository
 ) {
 
@@ -12,8 +12,8 @@ class QuerySmartContractUsecase internal constructor(
         args: List<String> = emptyList(),
         caller: String? = null,
         value: String? = null
-    ): SmartContractOutput {
-        val payload = SmartContractQuery(
+    ): QueryContractOutput {
+        val payload = QueryContractInput(
             scAddress = contractAddress.bech32(),
             funcName = funcName,
             args = args,
