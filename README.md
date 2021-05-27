@@ -1,4 +1,5 @@
 
+## [CHANGELOG](CHANGELOG.md)
 
 ## Elrond Kotlin SDK
 
