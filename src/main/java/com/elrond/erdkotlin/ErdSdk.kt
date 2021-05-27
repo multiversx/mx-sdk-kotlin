@@ -15,6 +15,7 @@ import com.elrond.erdkotlin.domain.networkconfig.GetNetworkConfigUsecase
 import com.elrond.erdkotlin.domain.transaction.*
 import com.elrond.erdkotlin.domain.transaction.SignTransactionUsecase
 import com.elrond.erdkotlin.domain.dns.GetDnsRegistrationCostUsecase
+import com.elrond.erdkotlin.domain.vm.CallContractUsecase
 import com.elrond.erdkotlin.domain.vm.QuerySmartContractUsecase
 import okhttp3.OkHttpClient
 
@@ -40,6 +41,7 @@ object ErdSdk {
     fun getTransactionStatusUsecase() = GetTransactionStatusUsecase(transactionRepository)
     fun estimateCostOfTransactionUsecase() = EstimateCostOfTransactionUsecase(transactionRepository)
     fun querySmartContractUsecase() = QuerySmartContractUsecase(vmRepository)
+    fun executeSmartContractUsecase() = CallContractUsecase(sendTransactionUsecase())
     fun getDnsRegistrationCostUsecase() = GetDnsRegistrationCostUsecase(
         querySmartContractUsecase(),
         computeDnsAddressUsecase()
