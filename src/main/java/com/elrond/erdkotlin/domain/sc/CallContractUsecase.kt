@@ -1,4 +1,4 @@
-package com.elrond.erdkotlin.domain.vm
+package com.elrond.erdkotlin.domain.sc
 
 import com.elrond.erdkotlin.domain.account.models.Account
 import com.elrond.erdkotlin.domain.networkconfig.models.NetworkConfig

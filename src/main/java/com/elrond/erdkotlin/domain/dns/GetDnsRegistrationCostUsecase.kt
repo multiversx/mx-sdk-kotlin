@@ -1,6 +1,6 @@
 package com.elrond.erdkotlin.domain.dns
 
-import com.elrond.erdkotlin.domain.vm.QueryContractUsecase
+import com.elrond.erdkotlin.domain.vm.query.QueryContractUsecase
 import com.elrond.erdkotlin.domain.wallet.models.Address
 import java.math.BigInteger
 
