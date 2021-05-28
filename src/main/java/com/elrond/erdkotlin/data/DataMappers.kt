@@ -141,4 +141,3 @@ internal fun GetNetworkConfigResponse.NetworkConfigData.toDomain() = NetworkConf
     erdStartTime = erdStartTime,
     erdTopUpFactor = erdTopUpFactor
 )
-

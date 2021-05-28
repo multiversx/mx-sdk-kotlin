@@ -44,4 +44,3 @@ internal data class GetNetworkConfigResponse(
         val erdTopUpFactor: String
     )
 }
-
