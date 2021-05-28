@@ -27,31 +27,50 @@ internal fun GetAccountResponse.AccountData.toDomain(address: Address) = Account
     username = username
 )
 
-internal fun GetAddressTransactionsResponse.TransactionOnNetworkData.toDomain() =
-    TransactionOnNetwork(
-        sender = Address.fromBech32(sender),
-        receiver = Address.fromBech32(receiver),
-        senderUsername = senderUsername,
-        receiverUsername = receiverUsername,
-        nonce = nonce,
-        value = value,
-        gasPrice = gasPrice,
-        gasLimit = gasLimit,
-        signature = signature,
-        hash = hash,
-        data = data,
-        status = status,
-        timestamp = timestamp,
-        gasUsed = gasUsed,
-        receiverShard = receiverShard,
-        senderShard = senderShard,
-        miniBlockHash = miniBlockHash,
-        round = round,
-        searchOrder = searchOrder,
-        fee = fee,
-        scResults = scResults,
-        hyperblockNonce = hyperblockNonce
-    )
+internal fun GetAddressTransactionsResponse.TransactionOnNetworkData.toDomain() = TransactionOnNetwork(
+    sender = Address.fromBech32(sender),
+    receiver = Address.fromBech32(receiver),
+    senderUsername = senderUsername,
+    receiverUsername = receiverUsername,
+    nonce = nonce,
+    value = value,
+    gasPrice = gasPrice,
+    gasLimit = gasLimit,
+    signature = signature,
+    hash = hash,
+    data = data,
+    status = status,
+    timestamp = timestamp,
+    gasUsed = gasUsed,
+    receiverShard = receiverShard,
+    senderShard = senderShard,
+    miniBlockHash = miniBlockHash,
+    round = round,
+    searchOrder = searchOrder,
+    fee = fee,
+    scResults = scResults?.map { scResult -> scResult.toDomain() },
+    hyperblockNonce = hyperblockNonce
+)
+
+internal fun GetAddressTransactionsResponse.TransactionOnNetworkData.ScResult.toDomain() = TransactionOnNetwork.ScResult(
+    hash = hash,
+    nonce = nonce,
+    gasLimit = gasLimit,
+    gasPrice = gasPrice,
+    value = value,
+    sender = sender,
+    receiver = receiver,
+    relayedValue = relayedValue,
+    data = data,
+    prevTxHash = prevTxHash,
+    originalTxHash = originalTxHash,
+    callType = callType,
+    relayerAddress = relayerAddress,
+    code = code,
+    codeMetadata = codeMetadata,
+    returnMessage = returnMessage,
+    originalSender = originalSender,
+)
 
 internal fun GetTransactionInfoResponse.TransactionInfoData.toDomain() = TransactionInfo(
     type = type,
