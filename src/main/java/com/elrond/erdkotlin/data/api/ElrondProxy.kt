@@ -9,8 +9,10 @@ import com.elrond.erdkotlin.data.transaction.responses.EstimateCostOfTransaction
 import com.elrond.erdkotlin.data.transaction.responses.GetTransactionInfoResponse
 import com.elrond.erdkotlin.data.transaction.responses.GetTransactionStatusResponse
 import com.elrond.erdkotlin.data.transaction.responses.SendTransactionResponse
-import com.elrond.erdkotlin.domain.vm.QueryContractInput
+import com.elrond.erdkotlin.data.vm.responses.QueryContractDigitResponse
+import com.elrond.erdkotlin.domain.vm.query.QueryContractInput
 import com.elrond.erdkotlin.data.vm.responses.QueryContractResponse
+import com.elrond.erdkotlin.data.vm.responses.QueryContractStringResponse
 import com.elrond.erdkotlin.domain.transaction.models.Transaction
 import com.elrond.erdkotlin.domain.wallet.models.Address
 import com.google.gson.Gson
@@ -82,6 +84,18 @@ internal class ElrondProxy(
     // Compute Output of Pure Function
     fun queryContract(queryContractInput: QueryContractInput): ElrondClient.ResponseBase<QueryContractResponse> {
         return elrondClient.doPost("vm-values/query", gson.toJson(queryContractInput))
+    }
+
+    fun queryContractHex(queryContractInput: QueryContractInput): ElrondClient.ResponseBase<QueryContractStringResponse> {
+        return elrondClient.doPost("vm-values/hex", gson.toJson(queryContractInput))
+    }
+
+    fun queryContractString(queryContractInput: QueryContractInput): ElrondClient.ResponseBase<QueryContractStringResponse> {
+        return elrondClient.doPost("vm-values/string", gson.toJson(queryContractInput))
+    }
+
+    fun queryContractInt(queryContractInput: QueryContractInput): ElrondClient.ResponseBase<QueryContractDigitResponse> {
+        return elrondClient.doPost("vm-values/int", gson.toJson(queryContractInput))
     }
 
 }

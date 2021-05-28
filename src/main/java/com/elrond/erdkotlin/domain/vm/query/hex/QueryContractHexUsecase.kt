@@ -1,8 +1,11 @@
-package com.elrond.erdkotlin.domain.vm
+package com.elrond.erdkotlin.domain.vm.query.hex
 
+import com.elrond.erdkotlin.domain.vm.query.QueryContractInput
+import com.elrond.erdkotlin.domain.vm.query.string.QueryContractStringOutput
+import com.elrond.erdkotlin.domain.vm.VmRepository
 import com.elrond.erdkotlin.domain.wallet.models.Address
 
-class QueryContractUsecase internal constructor(
+class QueryContractHexUsecase internal constructor(
     private val vmRepository: VmRepository
 ) {
 
@@ -12,7 +15,7 @@ class QueryContractUsecase internal constructor(
         args: List<String> = emptyList(),
         caller: String? = null,
         value: String? = null
-    ): QueryContractOutput {
+    ): QueryContractStringOutput {
         val payload = QueryContractInput(
             scAddress = contractAddress.bech32(),
             funcName = funcName,
@@ -20,6 +23,6 @@ class QueryContractUsecase internal constructor(
             caller = caller,
             value = value
         )
-        return vmRepository.queryContract(payload)
+        return vmRepository.queryContractHex(payload)
     }
 }

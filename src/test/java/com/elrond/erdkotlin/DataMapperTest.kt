@@ -5,8 +5,11 @@ import com.elrond.erdkotlin.data.vm.responses.QueryContractResponse
 import org.bouncycastle.util.encoders.Base64
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.any
 
+@RunWith(MockitoJUnitRunner::class)
 class DataMapperTest {
 
     @Test
@@ -16,13 +19,13 @@ class DataMapperTest {
         val queryResponseData = QueryContractResponse.Data(
             returnData = listOf(oneHundredBase64),
             returnCode = "",
-            returnMessage = any(),
+            returnMessage = null,
             gasRemaining = 0.toBigInteger(),
             gasRefund = 0.toBigInteger(),
-            outputAccounts = any(),
-            deletedAccounts = any(),
-            touchedAccounts = any(),
-            logs = any()
+            outputAccounts = null,
+            deletedAccounts = null,
+            touchedAccounts = null,
+            logs = null
         )
 
         val returnedData = queryResponseData.toDomain().returnData?.first()!!

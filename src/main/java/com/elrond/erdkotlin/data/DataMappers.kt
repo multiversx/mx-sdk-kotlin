@@ -4,12 +4,16 @@ import com.elrond.erdkotlin.data.account.responses.GetAccountResponse
 import com.elrond.erdkotlin.data.account.responses.GetAddressTransactionsResponse
 import com.elrond.erdkotlin.data.networkconfig.GetNetworkConfigResponse
 import com.elrond.erdkotlin.data.transaction.responses.GetTransactionInfoResponse
+import com.elrond.erdkotlin.data.vm.responses.QueryContractDigitResponse
 import com.elrond.erdkotlin.data.vm.responses.QueryContractResponse
+import com.elrond.erdkotlin.data.vm.responses.QueryContractStringResponse
 import com.elrond.erdkotlin.domain.networkconfig.models.NetworkConfig
 import com.elrond.erdkotlin.domain.account.models.Account
 import com.elrond.erdkotlin.domain.transaction.models.TransactionInfo
 import com.elrond.erdkotlin.domain.transaction.models.TransactionOnNetwork
-import com.elrond.erdkotlin.domain.vm.QueryContractOutput
+import com.elrond.erdkotlin.domain.vm.query.integer.QueryContractDigitOutput
+import com.elrond.erdkotlin.domain.vm.query.QueryContractOutput
+import com.elrond.erdkotlin.domain.vm.query.string.QueryContractStringOutput
 import com.elrond.erdkotlin.domain.wallet.models.Address
 import com.elrond.erdkotlin.utils.toHexString
 import org.bouncycastle.util.encoders.Base64
@@ -88,6 +92,14 @@ internal fun QueryContractResponse.Data.toDomain() = QueryContractOutput(
     gasRemaining = gasRemaining,
     gasRefund = gasRefund,
     outputAccounts = outputAccounts,
+)
+
+internal fun QueryContractStringResponse.toDomain() = QueryContractStringOutput(
+    data = data
+)
+
+internal fun QueryContractDigitResponse.toDomain() = QueryContractDigitOutput(
+    data = data
 )
 
 internal fun GetNetworkConfigResponse.NetworkConfigData.toDomain() = NetworkConfig(

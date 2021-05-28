@@ -1,6 +1,6 @@
 package com.elrond.erdkotlin.data.vm.responses
 
-import com.elrond.erdkotlin.domain.vm.QueryContractOutput
+import com.elrond.erdkotlin.domain.vm.query.QueryContractOutput
 import com.google.gson.internal.LinkedTreeMap
 import java.math.BigInteger
 

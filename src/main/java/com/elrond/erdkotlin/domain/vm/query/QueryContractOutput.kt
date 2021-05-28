@@ -1,4 +1,4 @@
-package com.elrond.erdkotlin.domain.vm
+package com.elrond.erdkotlin.domain.vm.query
 
 import com.google.gson.internal.LinkedTreeMap
 import java.math.BigInteger
