@@ -57,13 +57,21 @@ The sample application showcase how to do it on Android with Hilt framework (see
 | SendTransactionUsecase  | [POST transaction/send](https://docs.elrond.com/sdk-and-tools/rest-api/transactions/#send-transaction) |
 | EstimateCostOfTransactionUsecase  | [POST transaction/cost](https://docs.elrond.com/sdk-and-tools/rest-api/transactions/#estimate-cost-of-transaction) |
 | GetNetworkConfigUsecase  | [GET network/config](https://docs.elrond.com/sdk-and-tools/rest-api/network/#get-network-configuration) |
-| QuerySmartContractUsecase  | [POST vm-values/query](https://docs.elrond.com/sdk-and-tools/rest-api/virtual-machine/#compute-output-of-pure-function) |
+| QueryContractUsecase  | [POST vm-values/query](https://docs.elrond.com/sdk-and-tools/rest-api/virtual-machine/#compute-output-of-pure-function) |
+| QueryContractHexUsecase  | [POST vm-values/hex](https://docs.elrond.com/sdk-and-tools/rest-api/virtual-machine/#compute-hex-output-of-pure-function) |
+| QueryContractStringUsecase  | [POST vm-values/string](https://docs.elrond.com/sdk-and-tools/rest-api/virtual-machine/#compute-string-output-of-pure-function) |
+| QueryContractIntUsecase  | [POST vm-values/int](https://docs.elrond.com/sdk-and-tools/rest-api/virtual-machine/#get-integer-output-of-pure-function) |
+
+#### Contract
+| Usecase  | Description  |
+| ------------- | ------------- |
+| CallContractUsecase  | Interact with a Smart Contract (execute function): equivalent to [`erdpy contract call`](https://docs.elrond.com/sdk-and-tools/erdpy/erdpy/) |
 
 ##### DNS
 | Usecase  | Description  |
 | ------------- | ------------- |
-| RegisterDnsUsecase  | [`erdpy dns register`](https://docs.elrond.com/sdk-and-tools/erdpy/erdpy/) |
-| GetDnsRegistrationCostUsecase  | [`erdpy dns registration-cost`](https://docs.elrond.com/sdk-and-tools/erdpy/erdpy/) |
+| RegisterDnsUsecase  | Send a register transaction to the appropriate DNS contract from given user and with given name: equivalent to [`erdpy dns register`](https://docs.elrond.com/sdk-and-tools/erdpy/erdpy/) |
+| GetDnsRegistrationCostUsecase  | Gets the registration cost from a DNS smart contract: equivalent to [`erdpy dns registration-cost`](https://docs.elrond.com/sdk-and-tools/erdpy/erdpy/) |
 | CheckUsernameUsecase  | Can be useful for validating a text field before calling `RegisterDnsUsecase `|
 
 
