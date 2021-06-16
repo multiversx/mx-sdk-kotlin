@@ -7,7 +7,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.any
+import java.math.BigInteger
 
 @RunWith(MockitoJUnitRunner::class)
 class DataMapperTest {
@@ -20,8 +20,8 @@ class DataMapperTest {
             returnData = listOf(oneHundredBase64),
             returnCode = "",
             returnMessage = null,
-            gasRemaining = 0.toBigInteger(),
-            gasRefund = 0.toBigInteger(),
+            gasRemaining = BigInteger.ZERO,
+            gasRefund = BigInteger.ZERO,
             outputAccounts = null,
             deletedAccounts = null,
             touchedAccounts = null,

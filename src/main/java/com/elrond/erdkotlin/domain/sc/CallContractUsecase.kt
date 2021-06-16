@@ -26,7 +26,7 @@ class CallContractUsecase internal constructor(
         contractAddress: Address,
         funcName: String,
         args: List<String> = emptyList(),
-        value: BigInteger = 0.toBigInteger(),
+        value: BigInteger = BigInteger.ZERO,
     ): Transaction {
         val transaction = Transaction(
             nonce = account.nonce,

@@ -16,7 +16,7 @@ class GetDnsRegistrationCostUsecase internal constructor(
     fun execute(dnsAddress: Address): BigInteger {
         val result = queryContractUsecase.execute(dnsAddress, "getRegistrationCost")
         return when {
-            result.returnData.isNullOrEmpty() -> 0.toBigInteger()
+            result.returnData.isNullOrEmpty() -> BigInteger.ZERO
             else -> result.returnData[0].asBigInt
         }
     }

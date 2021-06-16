@@ -8,6 +8,7 @@ import com.elrond.erdkotlin.domain.wallet.models.Address
 import com.elrond.erdkotlin.helper.TestDataProvider
 import org.junit.Assert
 import org.junit.Test
+import java.math.BigInteger
 
 class SignTransactionUsecaseTest {
 
@@ -33,7 +34,7 @@ class SignTransactionUsecaseTest {
         val transaction = Transaction(
             sender = Address.fromBech32("erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th"),
             receiver = Address.fromBech32("erd1spyavw0956vq68xj8y4tenjpq2wd5a9p2c6j8gsz7ztyrnpxrruqzu66jx"),
-            value = 0.toBigInteger(),
+            value = BigInteger.ZERO,
             senderUsername = "alice",
             receiverUsername = "bob",
             data = "",

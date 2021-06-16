@@ -6,7 +6,7 @@ import java.math.BigInteger
 data class Account(
     val address: Address,
     val nonce: Long = 0,
-    val balance: BigInteger = 0.toBigInteger(),
+    val balance: BigInteger = BigInteger.ZERO,
     val code: String? = null,
     val username: String? = null
 ) {
