@@ -1,17 +1,16 @@
 package com.elrond.erdkotlin
 
-import com.elrond.erdkotlin.TestHelper.alicePrivateKey
-import com.elrond.erdkotlin.TestHelper.transactionWithData
-import com.elrond.erdkotlin.domain.wallet.models.Wallet
+import com.elrond.erdkotlin.helper.TestDataProvider.transactionWithData
+import com.elrond.erdkotlin.helper.TestDataProvider.wallet
 import com.elrond.erdkotlin.domain.transaction.SignTransactionUsecase
 import com.elrond.erdkotlin.domain.transaction.models.Transaction
 import com.elrond.erdkotlin.domain.wallet.models.Address
+import com.elrond.erdkotlin.helper.TestDataProvider
 import org.junit.Assert
 import org.junit.Test
+import java.math.BigInteger
 
 class SignTransactionUsecaseTest {
-
-    private val wallet = Wallet.createFromPrivateKey(alicePrivateKey)
 
     @Test
     fun `sign with data field`() {
@@ -35,7 +34,7 @@ class SignTransactionUsecaseTest {
         val transaction = Transaction(
             sender = Address.fromBech32("erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th"),
             receiver = Address.fromBech32("erd1spyavw0956vq68xj8y4tenjpq2wd5a9p2c6j8gsz7ztyrnpxrruqzu66jx"),
-            value = 0.toBigInteger(),
+            value = BigInteger.ZERO,
             senderUsername = "alice",
             receiverUsername = "bob",
             data = "",
@@ -66,7 +65,7 @@ class SignTransactionUsecaseTest {
     @Test
     fun `sign without data field`() {
         // Without data field
-        val transaction = TestHelper.transactionWithoutData()
+        val transaction = TestDataProvider.transactionWithoutData()
         val expectedSignature =
             "4a6d8186eae110894e7417af82c9bf9592696c0600faf110972e0e5310d8485efc656b867a2336acec2b4c1e5f76c9cc70ba1803c6a46455ed7f1e2989a90105"
         val expectedJson =
@@ -83,7 +82,7 @@ class SignTransactionUsecaseTest {
     @Test
     fun `sign with option`() {
         // with an option
-        val transaction = TestHelper.transactionWithoutData().copy(
+        val transaction = TestDataProvider.transactionWithoutData().copy(
             option = Transaction.OPTION_TX_HASH_SIGN
         )
         val expectedSignature =

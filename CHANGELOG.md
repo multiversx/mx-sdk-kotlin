@@ -1,6 +1,17 @@
 Changelog
 ============
 
+## [0.4.0] - 28.05.2021
+- implement QueryContractHexUsecase -> equivalent to `vm-values/hex` 
+- implement QueryContractStringUsecase -> equivalent to `vm-values/string`
+- implement QueryContractIntUsecase -> equivalent to `vm-values/int`
+- implement CallContractUsecase -> equivalent to `erdpy contract call`
+- rename `QuerySmartContractUsecase` to `QueryContractUsecase` (+ rename internal input fields)
+- `QueryContractOutput.returnData` from `QueryContractUsecase` is now decoded, formatted and accessible in several types (asBase64,asString,asHex,asBigInt)
+- add missing fields to `TransactionOnNetwork.ScResult`.
+- update pacakages (host app may have to re-import several classes) 
+
+
 ## [0.3.0] - 15.05.2021
 Add several fields to `NetworkConfig`  
 Add `code` and `username` fields to `Account`  

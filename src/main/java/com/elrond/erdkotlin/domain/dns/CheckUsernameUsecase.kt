@@ -17,5 +17,4 @@ class CheckUsernameUsecase internal constructor() {
         }
         return isUsernameValid
     }
-
 }

@@ -14,7 +14,7 @@ data class Transaction(
     val senderUsername: String? = null,
     val receiverUsername: String? = null,
     val nonce: Long = 0,
-    val value: BigInteger = 0.toBigInteger(),
+    val value: BigInteger = BigInteger.ZERO,
     val gasPrice: Long = 1000000000,
     val gasLimit: Long = 50000,
     val version: Int = VERSION_DEFAULT,
