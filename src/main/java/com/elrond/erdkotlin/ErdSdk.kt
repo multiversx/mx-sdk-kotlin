@@ -29,7 +29,7 @@ import okhttp3.OkHttpClient
 object ErdSdk {
 
     fun setNetwork(elrondNetwork: ElrondNetwork) {
-        elrondProxy.setUrl(elrondNetwork.url())
+        elrondProxy.setUrl(elrondNetwork.url)
     }
 
     fun getAccountUsecase() = GetAccountUsecase(accountRepository)
@@ -71,7 +71,7 @@ object ErdSdk {
     internal fun computeDnsAddressUsecase() = ComputeDnsAddressUsecase(checkUsernameUsecase())
 
     val elrondHttpClientBuilder = OkHttpClient.Builder()
-    private val elrondProxy = ElrondProxy(ElrondNetwork.DevNet.url(), elrondHttpClientBuilder)
+    private val elrondProxy = ElrondProxy(ElrondNetwork.DevNet.url, elrondHttpClientBuilder)
     private val networkConfigRepository = NetworkConfigRepositoryImpl(elrondProxy)
     private val accountRepository = AccountRepositoryImpl(elrondProxy)
     private val transactionRepository = TransactionRepositoryImpl(elrondProxy)
@@ -79,16 +79,9 @@ object ErdSdk {
     private val esdtRepository = EsdtRepositoryImpl(elrondProxy, vmRepository)
 }
 
-sealed class ElrondNetwork {
-    object MainNet : ElrondNetwork()
-    object DevNet : ElrondNetwork()
-    object TestNet : ElrondNetwork()
-    data class Custom(val url: String) : ElrondNetwork()
-
-    fun url() = when (this) {
-        MainNet -> "https://api.elrond.com"
-        DevNet -> "https://devnet-api.elrond.com"
-        TestNet -> "https://testnet-api.elrond.com"
-        is Custom -> url
-    }
+sealed class ElrondNetwork(open val url: String) {
+    object MainNet : ElrondNetwork("https://gateway.elrond.com")
+    object DevNet : ElrondNetwork("https://devnet-gateway.elrond.com")
+    object TestNet : ElrondNetwork("https://testnet-gateway.elrond.com")
+    data class Custom(override val url: String) : ElrondNetwork(url)
 }
