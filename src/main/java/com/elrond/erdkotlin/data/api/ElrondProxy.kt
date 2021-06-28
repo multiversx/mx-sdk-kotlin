@@ -4,6 +4,9 @@ import com.elrond.erdkotlin.data.account.responses.GetAccountResponse
 import com.elrond.erdkotlin.data.account.responses.GetAddressBalanceResponse
 import com.elrond.erdkotlin.data.account.responses.GetAddressNonceResponse
 import com.elrond.erdkotlin.data.account.responses.GetAddressTransactionsResponse
+import com.elrond.erdkotlin.data.esdt.response.GetAllEsdtResponse
+import com.elrond.erdkotlin.data.esdt.response.GetAllIssuedEsdtResponse
+import com.elrond.erdkotlin.data.esdt.response.GetEsdtBalanceResponse
 import com.elrond.erdkotlin.data.networkconfig.GetNetworkConfigResponse
 import com.elrond.erdkotlin.data.transaction.responses.EstimateCostOfTransactionResponse
 import com.elrond.erdkotlin.data.transaction.responses.GetTransactionInfoResponse
@@ -34,7 +37,7 @@ internal class ElrondProxy(
         return elrondClient.doGet("network/config")
     }
 
-    // Addresses
+    /** Addresses **/
 
     fun getAccount(address: Address): ElrondClient.ResponseBase<GetAccountResponse> {
         return elrondClient.doGet("address/${address.bech32()}")
@@ -52,7 +55,7 @@ internal class ElrondProxy(
         return elrondClient.doGet("address/${address.bech32()}/transactions")
     }
 
-    // Transactions
+    /** Transactions **/
 
     fun sendTransaction(transaction: Transaction): ElrondClient.ResponseBase<SendTransactionResponse> {
         val requestJson = transaction.serialize()
@@ -79,7 +82,7 @@ internal class ElrondProxy(
         return elrondClient.doGet("transaction/$txHash/status$senderAddress")
     }
 
-    // VM
+    /** VM **/
 
     // Compute Output of Pure Function
     fun queryContract(queryContractInput: QueryContractInput): ElrondClient.ResponseBase<QueryContractResponse> {
@@ -96,6 +99,24 @@ internal class ElrondProxy(
 
     fun queryContractInt(queryContractInput: QueryContractInput): ElrondClient.ResponseBase<QueryContractDigitResponse> {
         return elrondClient.doPost("vm-values/int", gson.toJson(queryContractInput))
+    }
+
+    /** ESDT **/
+
+    // Get all ESDT tokens for an address
+    fun getEsdtTokens(address: Address): ElrondClient.ResponseBase<GetAllEsdtResponse> {
+        return elrondClient.doGet("address/${address.bech32()}/esdt")
+    }
+
+    // Get balance for an address and an ESDT token
+    fun getEsdtBalance(address: Address, tokenIdentifier: String): ElrondClient.ResponseBase<GetEsdtBalanceResponse> {
+        return elrondClient.doGet("address/${address.bech32()}/esdt/$tokenIdentifier")
+    }
+
+
+    // Get all issued ESDT tokens
+    fun getAllIssuedEsdt(): ElrondClient.ResponseBase<GetAllIssuedEsdtResponse> {
+        return elrondClient.doGet("network/esdts")
     }
 
 }

@@ -2,6 +2,7 @@ package com.elrond.erdkotlin
 
 import com.elrond.erdkotlin.data.account.AccountRepositoryImpl
 import com.elrond.erdkotlin.data.api.ElrondProxy
+import com.elrond.erdkotlin.data.esdt.EsdtRepositoryImpl
 import com.elrond.erdkotlin.data.networkconfig.NetworkConfigRepositoryImpl
 import com.elrond.erdkotlin.data.transaction.TransactionRepositoryImpl
 import com.elrond.erdkotlin.data.vm.VmRepositoryImpl
@@ -15,6 +16,7 @@ import com.elrond.erdkotlin.domain.networkconfig.GetNetworkConfigUsecase
 import com.elrond.erdkotlin.domain.transaction.*
 import com.elrond.erdkotlin.domain.transaction.SignTransactionUsecase
 import com.elrond.erdkotlin.domain.dns.GetDnsRegistrationCostUsecase
+import com.elrond.erdkotlin.domain.esdt.*
 import com.elrond.erdkotlin.domain.sc.CallContractUsecase
 import com.elrond.erdkotlin.domain.vm.query.QueryContractUsecase
 import com.elrond.erdkotlin.domain.vm.query.hex.QueryContractHexUsecase
@@ -48,6 +50,11 @@ object ErdSdk {
     fun queryContractStringUsecase() = QueryContractStringUsecase(vmRepository)
     fun queryContracInttUsecase() = QueryContractIntUsecase(vmRepository)
     fun callContractUsecase() = CallContractUsecase(sendTransactionUsecase())
+    fun getAllEsdtUsecase() = GetAllEsdtUsecase(esdtRepository)
+    fun getAllIssuedEsdtUsecase() = GetAllIssuedEsdtUsecase(esdtRepository)
+    fun getEsdtBalanceUsecase() = GetEsdtBalanceUsecase(esdtRepository)
+    fun getEsdtPropertiesUsecase() = GetEsdtPropertiesUsecase(esdtRepository)
+    fun getEsdtSpecialRolesUsecase() = GetEsdtSpecialRolesUsecase(esdtRepository)
     fun getDnsRegistrationCostUsecase() = GetDnsRegistrationCostUsecase(
         queryContractUsecase(),
         computeDnsAddressUsecase()
@@ -69,6 +76,7 @@ object ErdSdk {
     private val accountRepository = AccountRepositoryImpl(elrondProxy)
     private val transactionRepository = TransactionRepositoryImpl(elrondProxy)
     private val vmRepository = VmRepositoryImpl(elrondProxy)
+    private val esdtRepository = EsdtRepositoryImpl(elrondProxy, vmRepository)
 }
 
 sealed class ElrondNetwork {
