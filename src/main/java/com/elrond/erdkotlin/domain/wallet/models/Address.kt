@@ -1,6 +1,7 @@
 package com.elrond.erdkotlin.domain.wallet.models
 
 import com.elrond.erdkotlin.Exceptions
+import com.elrond.erdkotlin.utils.toHexString
 import org.bitcoinj.core.Bech32
 import org.bouncycastle.util.encoders.DecoderException
 import org.bouncycastle.util.encoders.Hex
@@ -42,7 +43,7 @@ data class Address private constructor(
                 throw Exceptions.BadAddressHrpException()
             }
             val decodedBytes: ByteArray = convertBits(bech32Data.data, 5, 8, false)
-            val hex = String(Hex.encode(decodedBytes))
+            val hex = decodedBytes.toHexString()
             return Address(hex)
         }
 

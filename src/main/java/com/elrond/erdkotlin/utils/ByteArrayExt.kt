@@ -1,3 +1,5 @@
 package com.elrond.erdkotlin.utils
 
-internal fun ByteArray.toHexString() = joinToString(separator = ""){ "%02X".format((it.toInt() and 0xFF))}
+import org.bouncycastle.util.encoders.Hex
+
+internal fun ByteArray.toHexString() = String(Hex.encode(this))

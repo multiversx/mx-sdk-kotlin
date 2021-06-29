@@ -11,8 +11,7 @@ import com.elrond.erdkotlin.domain.esdt.models.EsdtToken
 import com.elrond.erdkotlin.domain.vm.VmRepository
 import com.elrond.erdkotlin.domain.vm.query.QueryContractInput
 import com.elrond.erdkotlin.domain.wallet.models.Address
-import org.bouncycastle.util.encoders.Hex
-import java.nio.charset.StandardCharsets
+import com.elrond.erdkotlin.utils.toHex
 
 internal class EsdtRepositoryImpl(
     private val elrondProxy: ElrondProxy,
@@ -32,24 +31,22 @@ internal class EsdtRepositoryImpl(
     }
 
     override fun getEsdtProperties(tokenIdentifier: String): EsdtProperties {
-        val arg = String(Hex.encode(tokenIdentifier.toByteArray(StandardCharsets.UTF_8)))
         val response = vmRepository.queryContract(
             QueryContractInput(
                 scAddress = ESDT_SC_ADDR,
                 funcName = "getTokenProperties",
-                args = listOf(arg)
+                args = listOf(tokenIdentifier.toHex())
             )
         )
         return response.toEsdtProperties()
     }
 
     override fun getEsdtSpecialRoles(tokenIdentifier: String): EsdtSpecialRoles? {
-        val arg = String(Hex.encode(tokenIdentifier.toByteArray(StandardCharsets.UTF_8)))
         val response = vmRepository.queryContract(
             QueryContractInput(
                 scAddress = ESDT_SC_ADDR,
                 funcName = "getSpecialRoles",
-                args = listOf(arg)
+                args = listOf(tokenIdentifier.toHex())
             )
         )
         return response.toSpecialRoles()
