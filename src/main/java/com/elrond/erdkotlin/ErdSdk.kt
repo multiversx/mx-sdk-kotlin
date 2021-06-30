@@ -17,6 +17,7 @@ import com.elrond.erdkotlin.domain.transaction.*
 import com.elrond.erdkotlin.domain.transaction.SignTransactionUsecase
 import com.elrond.erdkotlin.domain.dns.GetDnsRegistrationCostUsecase
 import com.elrond.erdkotlin.domain.esdt.*
+import com.elrond.erdkotlin.domain.esdt.management.*
 import com.elrond.erdkotlin.domain.sc.CallContractUsecase
 import com.elrond.erdkotlin.domain.vm.query.QueryContractUsecase
 import com.elrond.erdkotlin.domain.vm.query.hex.QueryContractHexUsecase
@@ -56,6 +57,15 @@ object ErdSdk {
     fun getEsdtPropertiesUsecase() = GetEsdtPropertiesUsecase(esdtRepository)
     fun getEsdtSpecialRolesUsecase() = GetEsdtSpecialRolesUsecase(esdtRepository)
     fun getIssueEsdtUsecase() = IssueEsdtUsecase(sendTransactionUsecase())
+    fun getBurnEsdtUsecase() = BurnEsdtUsecase(sendTransactionUsecase())
+    fun getChangeOwnerEsdtUsecase() = ChangeOwnerEsdtUsecase(sendTransactionUsecase())
+    fun getFreezeAccountEsdtUsecase() = FreezeAccountEsdtUsecase(sendTransactionUsecase())
+    fun getMintEsdtUsecase() = MintEsdtUsecase(sendTransactionUsecase())
+    fun getPauseAccountEsdtUsecase() = PauseAccountEsdtUsecase(sendTransactionUsecase())
+    fun getSetSpecialRolesToAccountEsdtUsecase() = SetSpecialRolesEsdtUsecase(sendTransactionUsecase())
+    fun getTransferEsdtUsecase() = TransferEsdtUsecase(sendTransactionUsecase())
+    fun getUpgradeEsdtUsecase() = UpgradeEsdtUsecase(sendTransactionUsecase())
+    fun getWipeAccountEsdtUsecase() = WipeAccountEsdtUsecase(sendTransactionUsecase())
     fun getDnsRegistrationCostUsecase() = GetDnsRegistrationCostUsecase(
         queryContractUsecase(),
         computeDnsAddressUsecase()

@@ -23,4 +23,7 @@ internal object ScUtils {
         return argUpCase.toBigInteger().toHex().toUpperCase(Locale.ROOT)
     }
 
+    fun prepareBooleanArgument(key: String, value: Boolean) =
+        "${key.toHex()}@${value.toString().toHex()}"
+
 }

@@ -3,6 +3,7 @@ package com.elrond.erdkotlin.data.esdt
 import com.elrond.erdkotlin.data.api.ElrondProxy
 import com.elrond.erdkotlin.data.toEsdtProperties
 import com.elrond.erdkotlin.data.toSpecialRoles
+import com.elrond.erdkotlin.domain.esdt.EsdtConstants
 import com.elrond.erdkotlin.domain.esdt.EsdtRepository
 import com.elrond.erdkotlin.domain.esdt.models.EsdtProperties
 import com.elrond.erdkotlin.domain.esdt.models.EsdtSpecialRoles
@@ -33,7 +34,7 @@ internal class EsdtRepositoryImpl(
     override fun getEsdtProperties(tokenIdentifier: String): EsdtProperties {
         val response = vmRepository.queryContract(
             QueryContractInput(
-                scAddress = ESDT_SC_ADDR,
+                scAddress = EsdtConstants.ESDT_SC_ADDR.bech32(),
                 funcName = "getTokenProperties",
                 args = listOf(tokenIdentifier.toHex())
             )
@@ -44,7 +45,7 @@ internal class EsdtRepositoryImpl(
     override fun getEsdtSpecialRoles(tokenIdentifier: String): EsdtSpecialRoles? {
         val response = vmRepository.queryContract(
             QueryContractInput(
-                scAddress = ESDT_SC_ADDR,
+                scAddress = EsdtConstants.ESDT_SC_ADDR.bech32(),
                 funcName = "getSpecialRoles",
                 args = listOf(tokenIdentifier.toHex())
             )
@@ -52,7 +53,4 @@ internal class EsdtRepositoryImpl(
         return response.toSpecialRoles()
     }
 
-    companion object {
-        const val ESDT_SC_ADDR = "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"
-    }
 }
