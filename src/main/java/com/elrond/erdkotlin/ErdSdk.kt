@@ -55,6 +55,7 @@ object ErdSdk {
     fun getEsdtBalanceUsecase() = GetEsdtBalanceUsecase(esdtRepository)
     fun getEsdtPropertiesUsecase() = GetEsdtPropertiesUsecase(esdtRepository)
     fun getEsdtSpecialRolesUsecase() = GetEsdtSpecialRolesUsecase(esdtRepository)
+    fun getIssueEsdtUsecase() = IssueEsdtUsecase(sendTransactionUsecase())
     fun getDnsRegistrationCostUsecase() = GetDnsRegistrationCostUsecase(
         queryContractUsecase(),
         computeDnsAddressUsecase()
