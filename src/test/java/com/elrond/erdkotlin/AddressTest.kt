@@ -16,8 +16,8 @@ class AddressTest {
         val bobHex = "c70cf50b238372fffaf7b7c5723b06b57859d424a2da621bcc1b2f317543aa36"
         assertEquals(aliceHex, Address.fromBech32(aliceBech32).hex)
         assertEquals(bobHex, Address.fromBech32(bobBech32).hex)
-        assertEquals(aliceBech32, Address.fromHex(aliceHex).bech32())
-        assertEquals(bobBech32, Address.fromHex(bobHex).bech32())
+        assertEquals(aliceBech32, Address.fromHex(aliceHex).bech32)
+        assertEquals(bobBech32, Address.fromHex(bobHex).bech32)
     }
 
     @Test

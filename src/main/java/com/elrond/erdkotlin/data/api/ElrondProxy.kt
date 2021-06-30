@@ -40,19 +40,19 @@ internal class ElrondProxy(
     /** Addresses **/
 
     fun getAccount(address: Address): ElrondClient.ResponseBase<GetAccountResponse> {
-        return elrondClient.doGet("address/${address.bech32()}")
+        return elrondClient.doGet("address/${address.bech32}")
     }
 
     fun getAddressNonce(address: Address): ElrondClient.ResponseBase<GetAddressNonceResponse> {
-        return elrondClient.doGet("address/${address.bech32()}/nonce")
+        return elrondClient.doGet("address/${address.bech32}/nonce")
     }
 
     fun getAddressBalance(address: Address): ElrondClient.ResponseBase<GetAddressBalanceResponse> {
-        return elrondClient.doGet("address/${address.bech32()}/balance")
+        return elrondClient.doGet("address/${address.bech32}/balance")
     }
 
     fun getAddressTransactions(address: Address): ElrondClient.ResponseBase<GetAddressTransactionsResponse> {
-        return elrondClient.doGet("address/${address.bech32()}/transactions")
+        return elrondClient.doGet("address/${address.bech32}/transactions")
     }
 
     /** Transactions **/
@@ -69,7 +69,7 @@ internal class ElrondProxy(
     fun getTransactionInfo(txHash: String, sender: Address?): ElrondClient.ResponseBase<GetTransactionInfoResponse> {
         val senderAddress = when (sender){
             null -> ""
-            else -> "?sender=${sender.bech32()}"
+            else -> "?sender=${sender.bech32}"
         }
         return elrondClient.doGet("transaction/$txHash$senderAddress")
     }
@@ -77,7 +77,7 @@ internal class ElrondProxy(
     fun getTransactionStatus(txHash: String, sender: Address?): ElrondClient.ResponseBase<GetTransactionStatusResponse> {
         val senderAddress = when (sender){
             null -> ""
-            else -> "?sender=${sender.bech32()}"
+            else -> "?sender=${sender.bech32}"
         }
         return elrondClient.doGet("transaction/$txHash/status$senderAddress")
     }
@@ -105,12 +105,12 @@ internal class ElrondProxy(
 
     // Get all ESDT tokens for an address
     fun getEsdtTokens(address: Address): ElrondClient.ResponseBase<GetAllEsdtResponse> {
-        return elrondClient.doGet("address/${address.bech32()}/esdt")
+        return elrondClient.doGet("address/${address.bech32}/esdt")
     }
 
     // Get balance for an address and an ESDT token
     fun getEsdtBalance(address: Address, tokenIdentifier: String): ElrondClient.ResponseBase<GetEsdtBalanceResponse> {
-        return elrondClient.doGet("address/${address.bech32()}/esdt/$tokenIdentifier")
+        return elrondClient.doGet("address/${address.bech32}/esdt/$tokenIdentifier")
     }
 
 

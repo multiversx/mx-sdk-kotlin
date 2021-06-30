@@ -45,7 +45,7 @@ internal class ComputeDnsAddressUsecase(private val checkUsernameUsecase: CheckU
     // https://github.com/ElrondNetwork/elrond-sdk/blob/d896fb777ca354374d93fec7723adbe28ea3f580/erdpy/contracts.py#L51
     internal fun computeAddress(account: Account): Address {
         // 8 bytes of zero + 2 bytes for VM type + 20 bytes of hash(owner) + 2 bytes of shard(owner)
-        val ownerBytes = account.address.pubkey()
+        val ownerBytes = account.address.pubKey
         val nonceBytes = longToUInt32ByteArray(account.nonce, 8)
         val bytesToHash = ownerBytes + nonceBytes
         val ownerHash = Keccak.Digest256().digest(bytesToHash)

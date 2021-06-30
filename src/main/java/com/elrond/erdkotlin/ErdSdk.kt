@@ -82,7 +82,7 @@ object ErdSdk {
     internal fun computeDnsAddressUsecase() = ComputeDnsAddressUsecase(checkUsernameUsecase())
 
     val elrondHttpClientBuilder = OkHttpClient.Builder()
-    private val elrondProxy = ElrondProxy(ElrondNetwork.DevNet.url, elrondHttpClientBuilder)
+    private val elrondProxy = ElrondProxy(ElrondNetwork.TestNet.url, elrondHttpClientBuilder)
     private val networkConfigRepository = NetworkConfigRepositoryImpl(elrondProxy)
     private val accountRepository = AccountRepositoryImpl(elrondProxy)
     private val transactionRepository = TransactionRepositoryImpl(elrondProxy)

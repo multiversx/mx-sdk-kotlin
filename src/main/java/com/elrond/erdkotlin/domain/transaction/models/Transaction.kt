@@ -39,8 +39,8 @@ data class Transaction(
         return mutableMapOf<String, Any>().apply {
             put("nonce", nonce)
             put("value", value.toString(10))
-            put("receiver", receiver.bech32())
-            put("sender", sender.bech32())
+            put("receiver", receiver.bech32)
+            put("sender", sender.bech32)
             if (!senderUsername.isNullOrEmpty()) {
                 put("senderUsername", encode(senderUsername))
             }

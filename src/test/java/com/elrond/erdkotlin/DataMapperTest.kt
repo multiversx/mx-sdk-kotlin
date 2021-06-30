@@ -87,7 +87,7 @@ class DataMapperTest {
         val esdtProperties = response.toEsdtProperties()
         assertEquals(esdtProperties.tokenName, "AliceTokens")
         assertEquals(esdtProperties.tokenType, "FungibleESDT")
-        assertEquals(esdtProperties.address.bech32(), "erd1mq6gn3yngzdgh0zdfa07zepga6a8yf7dkeue24zp3snknvjvucvs37hmrq")
+        assertEquals(esdtProperties.address.bech32, "erd1mq6gn3yngzdgh0zdfa07zepga6a8yf7dkeue24zp3snknvjvucvs37hmrq")
         assertEquals(esdtProperties.tokenName, "AliceTokens")
         assertEquals(esdtProperties.totalSupply, 10000000000.toBigInteger())
         assertEquals(esdtProperties.burntValue, BigInteger.ZERO)

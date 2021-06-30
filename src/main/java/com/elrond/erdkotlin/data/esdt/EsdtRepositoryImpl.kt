@@ -34,7 +34,7 @@ internal class EsdtRepositoryImpl(
     override fun getEsdtProperties(tokenIdentifier: String): EsdtProperties {
         val response = vmRepository.queryContract(
             QueryContractInput(
-                scAddress = EsdtConstants.ESDT_SC_ADDR.bech32(),
+                scAddress = EsdtConstants.ESDT_SC_ADDR.bech32,
                 funcName = "getTokenProperties",
                 args = listOf(tokenIdentifier.toHex())
             )
@@ -45,7 +45,7 @@ internal class EsdtRepositoryImpl(
     override fun getEsdtSpecialRoles(tokenIdentifier: String): EsdtSpecialRoles? {
         val response = vmRepository.queryContract(
             QueryContractInput(
-                scAddress = EsdtConstants.ESDT_SC_ADDR.bech32(),
+                scAddress = EsdtConstants.ESDT_SC_ADDR.bech32,
                 funcName = "getSpecialRoles",
                 args = listOf(tokenIdentifier.toHex())
             )
