@@ -12,7 +12,7 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class WIpeAccountEsdtUsecaseTest {
+class WipeAccountEsdtUsecaseTest {
 
     private val wipeEsdtUsecase = WipeAccountEsdtUsecase(sendTransactionUsecase)
 

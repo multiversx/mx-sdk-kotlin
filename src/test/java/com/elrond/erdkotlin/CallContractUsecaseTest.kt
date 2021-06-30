@@ -33,7 +33,6 @@ class CallContractUsecaseTest {
         assertEquals(
             "awesomeFunc@FF@5745474C442D616263646566@DEADBEEF",
             sentTransaction.data
-
         )
     }
 

@@ -107,7 +107,7 @@ class DataMapperTest {
 
     }
 
-  @Test
+    @Test
     fun `esdt specialRoles should be well formatted`() {
         val response = QueryContractResponse.Data(
             returnData = listOf("ZXJkMTM2cmw4NzhqMDltZXYyNGd6cHk3MGsyd2ZtM3htdmo1dWN3eGZmczl2NXQ1c2sza3NodHN6ejI1ejk6RVNEVFJvbGVMb2NhbEJ1cm4=", "ZXJkMWt6enYydXc5N3E1azltdDQ1OHFrM3E5dTNjd2h3cXlrdnlrNTk4cTJmNnd3eDdndnJkOXM4a3N6eGs6RVNEVFJvbGVORlRBZGRRdWFudGl0eSxFU0RUUm9sZU5GVEJ1cm4="),
