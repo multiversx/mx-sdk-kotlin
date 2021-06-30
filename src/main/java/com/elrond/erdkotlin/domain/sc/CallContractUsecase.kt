@@ -6,10 +6,7 @@ import com.elrond.erdkotlin.domain.transaction.SendTransactionUsecase
 import com.elrond.erdkotlin.domain.transaction.models.Transaction
 import com.elrond.erdkotlin.domain.wallet.models.Address
 import com.elrond.erdkotlin.domain.wallet.models.Wallet
-import com.elrond.erdkotlin.utils.isDigitsOnly
-import com.elrond.erdkotlin.utils.toHexString
 import java.math.BigInteger
-import java.util.*
 
 class CallContractUsecase internal constructor(
     private val sendTransactionUsecase: SendTransactionUsecase,
@@ -36,32 +33,9 @@ class CallContractUsecase internal constructor(
             gasPrice = gasPrice,
             gasLimit = gasLimit,
             value = value,
-            data = args.fold(funcName) { it1, it2 -> it1 + "@${prepareArgument(it2)}" }
+            data = args.fold(funcName) { it1, it2 -> it1 + "@${ScUtils.prepareArgument(it2)}" }
         )
         return sendTransactionUsecase.execute(transaction, wallet)
-    }
-
-    // source:
-    // https://github.com/ElrondNetwork/elrond-sdk/blob/576fdc4bc0fa713738d8556600f04e6377c7623f/erdpy/contracts.py#L156
-    private fun prepareArgument(arg: String): String {
-        val hexPrefix = "0X"
-        val argUpCase = arg.toUpperCase(Locale.ROOT)
-
-        if (argUpCase.startsWith(hexPrefix)){
-            return argUpCase.substring(startIndex = hexPrefix.length)
-        }
-
-        if (!argUpCase.isDigitsOnly()){
-            throw IllegalArgumentException("unknown format for $arg")
-        }
-
-        val asNumber = argUpCase.toInt()
-        val asHexstring = asNumber.toHexString()
-        if (asHexstring.length % 2 == 1){
-            return "0$asHexstring"
-        }
-        return asHexstring
-
     }
 
 }
