@@ -62,6 +62,26 @@ The sample application showcase how to do it on Android with Hilt framework (see
 | QueryContractStringUsecase  | [POST vm-values/string](https://docs.elrond.com/sdk-and-tools/rest-api/virtual-machine/#compute-string-output-of-pure-function) |
 | QueryContractIntUsecase  | [POST vm-values/int](https://docs.elrond.com/sdk-and-tools/rest-api/virtual-machine/#get-integer-output-of-pure-function) |
 
+#### ESDT
+| Usecase  | Description  |
+| ------------- | ------------- |
+| GetAllEsdtUsecase  | Get all ESDT tokens for an address: [GET address/:bech32Address/esdt](https://docs.elrond.com/developers/esdt-tokens/#get-all-esdt-tokens-for-an-address) |
+| GetEsdtBalanceUsecase  | Get balance for an address and an ESDT token: [GET address/:bech32Address/esdt/:tokenIdentifier](https://docs.elrond.com/developers/esdt-tokens/#get-balance-for-an-address-and-an-esdt-token) |
+| GetAllIssuedEsdtUsecase  | Get all issued ESDT tokens: [GET network/esdts](https://docs.elrond.com/developers/esdt-tokens/#get-all-issued-esdt-tokens) |
+| GetEsdtPropertiesUsecase  | Get ESDT token properties: [POST vm-values/query](https://docs.elrond.com/developers/esdt-tokens/#get-esdt-token-properties) |
+| GetEsdtSpecialRolesUsecase  | Get special roles for a token: [POST vm-values/query](https://docs.elrond.com/developers/esdt-tokens/#get-special-roles-for-a-token) |
+| IssueEsdtUsecase  | Issue fungible ESDT tokens [(doc)](https://docs.elrond.com/developers/esdt-tokens/#issuance-of-fungible-esdt-tokens) |
+| TransferEsdtUsecase  | Transfert ESDT to any account [(doc)](https://docs.elrond.com/developers/esdt-tokens/#transfers) |
+| MintEsdtUsecase  | Mint ESDT [(doc)](https://docs.elrond.com/developers/esdt-tokens/#minting) |
+| BurnEsdtUsecase  | Burn ESDT [(doc)](https://docs.elrond.com/developers/esdt-tokens/#burning) |
+| PauseAccountEsdtUsecase  | Pause/UnPause ESDT [(doc)](https://docs.elrond.com/developers/esdt-tokens/#pausing-and-unpausing) |
+| FreezeAccountEsdtUsecase  | Freeze/UnFreeze ESDT [(doc)](https://docs.elrond.com/developers/esdt-tokens/#freezing-and-unfreezing) |
+| WipeAccountEsdtUsecase  | Wipe ESDT [(doc)](https://docs.elrond.com/developers/esdt-tokens/#wiping) |
+| SetSpecialRolesEsdtUsecase  | Set/Unset Special roles [(doc)](https://docs.elrond.com/developers/esdt-tokens/#setting-and-unsetting-special-roles) |
+| ChangeOwnerEsdtUsecase  | Transfer token management rights [(doc)](https://docs.elrond.com/developers/esdt-tokens/#transferring-token-management-rights) |
+| UpgradeEsdtUsecase  | Change properties [(doc)](https://docs.elrond.com/developers/esdt-tokens/#upgrading-changing-properties) |
+
+
 #### Contract
 | Usecase  | Description  |
 | ------------- | ------------- |
