@@ -6,8 +6,7 @@ import java.math.BigInteger
 internal object EsdtConstants {
 
     const val ESDT_MANAGEMENT_GAS_LIMIT = 60000000L
-    const val ESDT_TRANSFER_GAS_LIMIT = 500000L
-    val ESDT_TRANSFER_VALUE = BigInteger.ZERO
+    val ESDT_TRANSACTION_VALUE = BigInteger.ZERO
     val ESDT_SC_ADDR = Address.fromBech32("erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u")
 
 }

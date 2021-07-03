@@ -3,7 +3,7 @@ package com.elrond.erdkotlin.domain.esdt.management
 import com.elrond.erdkotlin.domain.account.models.Account
 import com.elrond.erdkotlin.domain.esdt.EsdtConstants
 import com.elrond.erdkotlin.domain.esdt.EsdtConstants.ESDT_MANAGEMENT_GAS_LIMIT
-import com.elrond.erdkotlin.domain.esdt.EsdtConstants.ESDT_TRANSFER_VALUE
+import com.elrond.erdkotlin.domain.esdt.EsdtConstants.ESDT_TRANSACTION_VALUE
 import com.elrond.erdkotlin.domain.esdt.models.EsdtSpecialRole
 import com.elrond.erdkotlin.domain.networkconfig.models.NetworkConfig
 import com.elrond.erdkotlin.domain.transaction.SendTransactionUsecase
@@ -39,7 +39,7 @@ class SetSpecialRolesEsdtUsecase internal constructor(
             Transaction(
                 sender = account.address,
                 receiver = EsdtConstants.ESDT_SC_ADDR,
-                value = ESDT_TRANSFER_VALUE,
+                value = ESDT_TRANSACTION_VALUE,
                 gasLimit = ESDT_MANAGEMENT_GAS_LIMIT,
                 gasPrice = gasPrice,
                 data = args.fold(action.serializedValue) { it1, it2 -> "$it1@$it2" },

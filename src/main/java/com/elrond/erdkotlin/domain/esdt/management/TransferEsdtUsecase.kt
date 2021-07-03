@@ -1,8 +1,7 @@
 package com.elrond.erdkotlin.domain.esdt.management
 
 import com.elrond.erdkotlin.domain.account.models.Account
-import com.elrond.erdkotlin.domain.esdt.EsdtConstants.ESDT_TRANSFER_GAS_LIMIT
-import com.elrond.erdkotlin.domain.esdt.EsdtConstants.ESDT_TRANSFER_VALUE
+import com.elrond.erdkotlin.domain.esdt.EsdtConstants.ESDT_TRANSACTION_VALUE
 import com.elrond.erdkotlin.domain.networkconfig.models.NetworkConfig
 import com.elrond.erdkotlin.domain.sc.ScUtils
 import com.elrond.erdkotlin.domain.transaction.SendTransactionUsecase
@@ -42,8 +41,8 @@ class TransferEsdtUsecase internal constructor(
             Transaction(
                 sender = account.address,
                 receiver = receiver,
-                value = ESDT_TRANSFER_VALUE,
-                gasLimit = ESDT_TRANSFER_GAS_LIMIT,
+                value = ESDT_TRANSACTION_VALUE,
+                gasLimit = 500000L, // TODO + <an appropriate amount for the method call>
                 gasPrice = gasPrice,
                 data = args.fold("ESDTTransfer") { it1, it2 -> "$it1@$it2" },
                 chainID = networkConfig.chainID,
