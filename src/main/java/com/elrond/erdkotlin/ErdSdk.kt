@@ -15,7 +15,11 @@ import com.elrond.erdkotlin.domain.networkconfig.GetNetworkConfigUsecase
 import com.elrond.erdkotlin.domain.transaction.*
 import com.elrond.erdkotlin.domain.transaction.SignTransactionUsecase
 import com.elrond.erdkotlin.domain.dns.GetDnsRegistrationCostUsecase
-import com.elrond.erdkotlin.domain.vm.QuerySmartContractUsecase
+import com.elrond.erdkotlin.domain.sc.CallContractUsecase
+import com.elrond.erdkotlin.domain.vm.query.QueryContractUsecase
+import com.elrond.erdkotlin.domain.vm.query.hex.QueryContractHexUsecase
+import com.elrond.erdkotlin.domain.vm.query.integer.QueryContractIntUsecase
+import com.elrond.erdkotlin.domain.vm.query.string.QueryContractStringUsecase
 import okhttp3.OkHttpClient
 
 // Implemented as an `object` because we are not using any dependency injection library
@@ -39,9 +43,13 @@ object ErdSdk {
     fun getTransactionInfoUsecase() = GetTransactionInfoUsecase(transactionRepository)
     fun getTransactionStatusUsecase() = GetTransactionStatusUsecase(transactionRepository)
     fun estimateCostOfTransactionUsecase() = EstimateCostOfTransactionUsecase(transactionRepository)
-    fun querySmartContractUsecase() = QuerySmartContractUsecase(vmRepository)
+    fun queryContractUsecase() = QueryContractUsecase(vmRepository)
+    fun queryContractHexUsecase() = QueryContractHexUsecase(vmRepository)
+    fun queryContractStringUsecase() = QueryContractStringUsecase(vmRepository)
+    fun queryContracInttUsecase() = QueryContractIntUsecase(vmRepository)
+    fun callContractUsecase() = CallContractUsecase(sendTransactionUsecase())
     fun getDnsRegistrationCostUsecase() = GetDnsRegistrationCostUsecase(
-        querySmartContractUsecase(),
+        queryContractUsecase(),
         computeDnsAddressUsecase()
     )
 

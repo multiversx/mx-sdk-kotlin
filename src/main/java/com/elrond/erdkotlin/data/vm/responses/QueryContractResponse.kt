@@ -1,6 +1,6 @@
 package com.elrond.erdkotlin.data.vm.responses
 
-import com.elrond.erdkotlin.domain.vm.SmartContractOutput
+import com.elrond.erdkotlin.domain.vm.query.QueryContractOutput
 import com.google.gson.internal.LinkedTreeMap
 import java.math.BigInteger
 
@@ -14,7 +14,7 @@ internal data class QueryContractResponse(
         val returnMessage: String?,
         val gasRemaining: BigInteger,
         val gasRefund: BigInteger,
-        val outputAccounts: LinkedTreeMap<String, SmartContractOutput.OutputAccount>,
+        val outputAccounts: LinkedTreeMap<String, QueryContractOutput.OutputAccount>?,
 
         // Keeping those as placeholders for future development
         // https://github.com/ElrondNetwork/elrond-go/blob/master/core/vmcommon/output.go
