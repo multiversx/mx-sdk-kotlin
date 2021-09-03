@@ -15,7 +15,7 @@ class QueryContractUsecase internal constructor(
         value: String? = null
     ): QueryContractOutput {
         val payload = QueryContractInput(
-            scAddress = contractAddress.bech32(),
+            scAddress = contractAddress.bech32,
             funcName = funcName,
             args = args,
             caller = caller,

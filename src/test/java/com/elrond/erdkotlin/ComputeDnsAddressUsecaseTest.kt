@@ -34,7 +34,7 @@ class ComputeDnsAddressUsecaseTest {
         ))
         assertEquals(
             "erd1qqqqqqqqqqqqqpgq2u60t6gppp8uyrtutng27k9quk42xw6qqq7s63qz5v",
-            address.bech32()
+            address.bech32
         )
     }
 
@@ -43,7 +43,7 @@ class ComputeDnsAddressUsecaseTest {
         val dnsAddress = computeDnsAddressUsecase.execute("alex.elrond")
         assertEquals(
             "erd1qqqqqqqqqqqqqpgq2u60t6gppp8uyrtutng27k9quk42xw6qqq7s63qz5v",
-            dnsAddress.bech32()
+            dnsAddress.bech32
         )
     }
 
@@ -61,7 +61,7 @@ class ComputeDnsAddressUsecaseTest {
         val dnsAddress = computeDnsAddressUsecase.execute(61)
         assertEquals(
             "erd1qqqqqqqqqqqqqpgq2u60t6gppp8uyrtutng27k9quk42xw6qqq7s63qz5v",
-            dnsAddress.bech32()
+            dnsAddress.bech32
         )
     }
 

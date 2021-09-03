@@ -2,8 +2,8 @@ package com.elrond.erdkotlin.domain.dns
 
 import com.elrond.erdkotlin.domain.account.models.Account
 import com.elrond.erdkotlin.domain.wallet.models.Address
+import com.elrond.erdkotlin.utils.toHexString
 import org.bouncycastle.jcajce.provider.digest.Keccak
-import org.bouncycastle.util.encoders.Hex
 import java.nio.charset.StandardCharsets
 
 // Returns the compatible DNS address
@@ -28,7 +28,7 @@ internal class ComputeDnsAddressUsecase(private val checkUsernameUsecase: CheckU
         )
         val deployerPubkey = deployerPubkeyPrefix + 0 + shardId
         val account = Account(
-            address = Address.fromHex(String(Hex.encode(deployerPubkey))),
+            address = Address.fromHex(deployerPubkey.toHexString()),
             nonce = 0
         )
         return computeAddress(account)
@@ -45,13 +45,13 @@ internal class ComputeDnsAddressUsecase(private val checkUsernameUsecase: CheckU
     // https://github.com/ElrondNetwork/elrond-sdk/blob/d896fb777ca354374d93fec7723adbe28ea3f580/erdpy/contracts.py#L51
     internal fun computeAddress(account: Account): Address {
         // 8 bytes of zero + 2 bytes for VM type + 20 bytes of hash(owner) + 2 bytes of shard(owner)
-        val ownerBytes = account.address.pubkey()
+        val ownerBytes = account.address.pubKey
         val nonceBytes = longToUInt32ByteArray(account.nonce, 8)
         val bytesToHash = ownerBytes + nonceBytes
         val ownerHash = Keccak.Digest256().digest(bytesToHash)
         val dnsAddress =
             ByteArray(8) { 0 } + 5 + 0 + ownerHash.slice(10 until 30) + ownerBytes[30] + ownerBytes[31]
-        return Address.fromHex(String(Hex.encode(dnsAddress)))
+        return Address.fromHex(dnsAddress.toHexString())
     }
 
     // litte endian implementation

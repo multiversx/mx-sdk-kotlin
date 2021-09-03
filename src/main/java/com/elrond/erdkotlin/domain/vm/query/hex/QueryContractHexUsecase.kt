@@ -17,7 +17,7 @@ class QueryContractHexUsecase internal constructor(
         value: String? = null
     ): QueryContractStringOutput {
         val payload = QueryContractInput(
-            scAddress = contractAddress.bech32(),
+            scAddress = contractAddress.bech32,
             funcName = funcName,
             args = args,
             caller = caller,

@@ -5,8 +5,7 @@ import com.elrond.erdkotlin.domain.networkconfig.models.NetworkConfig
 import com.elrond.erdkotlin.domain.transaction.SendTransactionUsecase
 import com.elrond.erdkotlin.domain.transaction.models.Transaction
 import com.elrond.erdkotlin.domain.wallet.models.Wallet
-import org.bouncycastle.util.encoders.Hex
-import java.nio.charset.StandardCharsets
+import com.elrond.erdkotlin.utils.toHexBytes
 
 class RegisterDnsUsecase internal constructor(
     private val sendTransactionUsecase: SendTransactionUsecase,
@@ -23,7 +22,7 @@ class RegisterDnsUsecase internal constructor(
         gasLimit: Long
     ): Transaction {
         val dnsAddress = computeDnsAddressUsecase.execute(username)
-        val encodedName = Hex.encode(username.toByteArray(StandardCharsets.UTF_8))
+        val encodedName = username.toHexBytes()
         val transaction = Transaction(
             nonce = account.nonce,
             receiver = dnsAddress,

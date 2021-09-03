@@ -1,6 +1,7 @@
 package com.elrond.erdkotlin.domain.wallet.models
 
 import com.elrond.erdkotlin.Exceptions
+import com.elrond.erdkotlin.utils.toHexString
 import org.bitcoinj.crypto.MnemonicCode
 import org.bitcoinj.crypto.MnemonicException.MnemonicLengthException
 import org.bouncycastle.crypto.digests.SHA512Digest
@@ -23,8 +24,8 @@ class Wallet(
     private val privateKey: ByteArray,
 ) {
 
-    val publicKeyHex: String = String(Hex.encode(publicKey))
-    val privateKeyHex: String = String(Hex.encode(privateKey))
+    val publicKeyHex: String = publicKey.toHexString()
+    val privateKeyHex: String = privateKey.toHexString()
 
     fun sign(data: String): String = sign(data.toByteArray(StandardCharsets.UTF_8))
 
@@ -33,8 +34,7 @@ class Wallet(
             update(data, 0, data.size)
         }
         val signature = signer.generateSignature()
-        val hex = Hex.encode(signature)
-        return String(hex)
+        return signature.toHexString()
     }
 
     private fun createEd25519Signer(): Ed25519Signer {

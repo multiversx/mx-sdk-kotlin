@@ -2,6 +2,7 @@ package com.elrond.erdkotlin
 
 import com.elrond.erdkotlin.data.account.AccountRepositoryImpl
 import com.elrond.erdkotlin.data.api.ElrondProxy
+import com.elrond.erdkotlin.data.esdt.EsdtRepositoryImpl
 import com.elrond.erdkotlin.data.networkconfig.NetworkConfigRepositoryImpl
 import com.elrond.erdkotlin.data.transaction.TransactionRepositoryImpl
 import com.elrond.erdkotlin.data.vm.VmRepositoryImpl
@@ -15,6 +16,8 @@ import com.elrond.erdkotlin.domain.networkconfig.GetNetworkConfigUsecase
 import com.elrond.erdkotlin.domain.transaction.*
 import com.elrond.erdkotlin.domain.transaction.SignTransactionUsecase
 import com.elrond.erdkotlin.domain.dns.GetDnsRegistrationCostUsecase
+import com.elrond.erdkotlin.domain.esdt.*
+import com.elrond.erdkotlin.domain.esdt.management.*
 import com.elrond.erdkotlin.domain.sc.CallContractUsecase
 import com.elrond.erdkotlin.domain.vm.query.QueryContractUsecase
 import com.elrond.erdkotlin.domain.vm.query.hex.QueryContractHexUsecase
@@ -27,7 +30,7 @@ import okhttp3.OkHttpClient
 object ErdSdk {
 
     fun setNetwork(elrondNetwork: ElrondNetwork) {
-        elrondProxy.setUrl(elrondNetwork.url())
+        elrondProxy.setUrl(elrondNetwork.url)
     }
 
     fun getAccountUsecase() = GetAccountUsecase(accountRepository)
@@ -48,6 +51,21 @@ object ErdSdk {
     fun queryContractStringUsecase() = QueryContractStringUsecase(vmRepository)
     fun queryContracInttUsecase() = QueryContractIntUsecase(vmRepository)
     fun callContractUsecase() = CallContractUsecase(sendTransactionUsecase())
+    fun getAllEsdtUsecase() = GetAllEsdtUsecase(esdtRepository)
+    fun getAllIssuedEsdtUsecase() = GetAllIssuedEsdtUsecase(esdtRepository)
+    fun getEsdtBalanceUsecase() = GetEsdtBalanceUsecase(esdtRepository)
+    fun getEsdtPropertiesUsecase() = GetEsdtPropertiesUsecase(esdtRepository)
+    fun getEsdtSpecialRolesUsecase() = GetEsdtSpecialRolesUsecase(esdtRepository)
+    fun getIssueEsdtUsecase() = IssueEsdtUsecase(sendTransactionUsecase())
+    fun getBurnEsdtUsecase() = BurnEsdtUsecase(sendTransactionUsecase())
+    fun getChangeOwnerEsdtUsecase() = ChangeOwnerEsdtUsecase(sendTransactionUsecase())
+    fun getFreezeAccountEsdtUsecase() = FreezeAccountEsdtUsecase(sendTransactionUsecase())
+    fun getMintEsdtUsecase() = MintEsdtUsecase(sendTransactionUsecase())
+    fun getPauseAccountEsdtUsecase() = PauseAccountEsdtUsecase(sendTransactionUsecase())
+    fun getSetSpecialRolesToAccountEsdtUsecase() = SetSpecialRolesEsdtUsecase(sendTransactionUsecase())
+    fun getTransferEsdtUsecase() = TransferEsdtUsecase(sendTransactionUsecase())
+    fun getUpgradeEsdtUsecase() = UpgradeEsdtUsecase(sendTransactionUsecase())
+    fun getWipeAccountEsdtUsecase() = WipeAccountEsdtUsecase(sendTransactionUsecase())
     fun getDnsRegistrationCostUsecase() = GetDnsRegistrationCostUsecase(
         queryContractUsecase(),
         computeDnsAddressUsecase()
@@ -64,23 +82,17 @@ object ErdSdk {
     internal fun computeDnsAddressUsecase() = ComputeDnsAddressUsecase(checkUsernameUsecase())
 
     val elrondHttpClientBuilder = OkHttpClient.Builder()
-    private val elrondProxy = ElrondProxy(ElrondNetwork.DevNet.url(), elrondHttpClientBuilder)
+    private val elrondProxy = ElrondProxy(ElrondNetwork.TestNet.url, elrondHttpClientBuilder)
     private val networkConfigRepository = NetworkConfigRepositoryImpl(elrondProxy)
     private val accountRepository = AccountRepositoryImpl(elrondProxy)
     private val transactionRepository = TransactionRepositoryImpl(elrondProxy)
     private val vmRepository = VmRepositoryImpl(elrondProxy)
+    private val esdtRepository = EsdtRepositoryImpl(elrondProxy, vmRepository)
 }
 
-sealed class ElrondNetwork {
-    object MainNet : ElrondNetwork()
-    object DevNet : ElrondNetwork()
-    object TestNet : ElrondNetwork()
-    data class Custom(val url: String) : ElrondNetwork()
-
-    fun url() = when (this) {
-        MainNet -> "https://api.elrond.com"
-        DevNet -> "https://devnet-api.elrond.com"
-        TestNet -> "https://testnet-api.elrond.com"
-        is Custom -> url
-    }
+sealed class ElrondNetwork(open val url: String) {
+    object MainNet : ElrondNetwork("https://gateway.elrond.com")
+    object DevNet : ElrondNetwork("https://devnet-gateway.elrond.com")
+    object TestNet : ElrondNetwork("https://testnet-gateway.elrond.com")
+    data class Custom(override val url: String) : ElrondNetwork(url)
 }
