@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'commons-codec:commons-codec:1.9'
+    implementation 'org.bitcoinj:bitcoinj-core:0.15.8'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
+
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
+}
