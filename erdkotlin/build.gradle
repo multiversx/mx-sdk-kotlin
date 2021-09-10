@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'kotlin'
+    id 'maven-publish'
 }
 
 java {
@@ -19,3 +20,36 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
 }
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.java.srcDirs
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId pomGroupID
+                artifactId project.name
+                version pomVersion
+
+                from components.kotlin
+                artifact androidSourcesJar
+
+                pom {
+                    url = 'https://github.com/ElrondNetwork/elrond-sdk-erdkotlin'
+                    licenses {
+                        license {
+                            name = 'GNU GENERAL PUBLIC LICENSE'
+                            url = 'https://github.com/ElrondNetwork/elrond-sdk-erdkotlin/blob/main/LICENSE'
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+
