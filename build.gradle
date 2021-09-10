@@ -1,7 +1,7 @@
 
 ext {
     pomVersion = '0.5.1'
-    pomGroupID = "com.asaddour.erdkotlin" // for test purpose
+    pomGroupID = "com.elrond.erdkotlin"
 }
 
 buildscript {
