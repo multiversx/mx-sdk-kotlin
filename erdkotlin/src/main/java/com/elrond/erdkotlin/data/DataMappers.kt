@@ -52,32 +52,11 @@ internal fun GetAddressTransactionsResponse.TransactionOnNetworkData.toDomain() 
         round = round,
         searchOrder = searchOrder,
         fee = fee,
-        scResults = scResults?.map { scResult -> scResult.toDomain() },
         hyperblockNonce = hyperblockNonce
     )
 
-internal fun GetAddressTransactionsResponse.TransactionOnNetworkData.ScResult.toDomain() =
-    TransactionOnNetwork.ScResult(
-        hash = hash,
-        nonce = nonce,
-        gasLimit = gasLimit,
-        gasPrice = gasPrice,
-        value = value,
-        sender = sender,
-        receiver = receiver,
-        relayedValue = relayedValue,
-        data = data,
-        prevTxHash = prevTxHash,
-        originalTxHash = originalTxHash,
-        callType = callType,
-        relayerAddress = relayerAddress,
-        code = code,
-        codeMetadata = codeMetadata,
-        returnMessage = returnMessage,
-        originalSender = originalSender,
-    )
-
-internal fun GetTransactionInfoResponse.TransactionInfoData.toDomain() = TransactionInfo(
+internal fun GetTransactionInfoResponse.TransactionInfoData.toDomain(txHash: String) = TransactionInfo(
+    txHash = txHash,
     type = type,
     nonce = nonce,
     round = round,
@@ -94,10 +73,26 @@ internal fun GetTransactionInfoResponse.TransactionInfoData.toDomain() = Transac
     sourceShard = sourceShard,
     destinationShard = destinationShard,
     blockNonce = blockNonce,
+    timestamp = timestamp,
     miniBlockHash = miniBlockHash,
     blockHash = blockHash,
     status = status,
-    hyperblockNonce = hyperblockNonce
+    hyperblockNonce = hyperblockNonce,
+    smartContractResults = smartContractResults?.map { scr ->
+        TransactionInfo.ScResult(
+            hash = scr.hash,
+            nonce = scr.nonce,
+            value = scr.value,
+            receiver = Address.fromBech32(scr.receiver),
+            sender = Address.fromBech32(scr.sender),
+            data = scr.data,
+            prevTxHash = scr.prevTxHash,
+            originalTxHash = scr.originalTxHash,
+            gasLimit = scr.gasLimit,
+            gasPrice = scr.gasPrice,
+            callType = scr.callType
+        )
+    },
 )
 
 internal fun QueryContractResponse.Data.toDomain() = QueryContractOutput(
