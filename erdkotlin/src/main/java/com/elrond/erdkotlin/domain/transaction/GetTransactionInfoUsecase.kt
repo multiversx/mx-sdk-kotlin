@@ -4,6 +4,6 @@ import com.elrond.erdkotlin.domain.wallet.models.Address
 
 class GetTransactionInfoUsecase internal constructor(private val transactionRepository: TransactionRepository) {
 
-    fun execute(txHash: String, sender: Address? = null) =
-        transactionRepository.getTransactionInfo(txHash, sender)
+    fun execute(txHash: String, sender: Address? = null, withResults: Boolean = false) =
+        transactionRepository.getTransactionInfo(txHash, sender, withResults)
 }

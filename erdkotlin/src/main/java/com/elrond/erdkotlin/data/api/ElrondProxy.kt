@@ -66,12 +66,12 @@ internal class ElrondProxy(
         return elrondClient.doPost("transaction/cost", transaction.serialize())
     }
 
-    fun getTransactionInfo(txHash: String, sender: Address?): ElrondClient.ResponseBase<GetTransactionInfoResponse> {
-        val senderAddress = when (sender){
-            null -> ""
-            else -> "?sender=${sender.bech32}"
+    fun getTransactionInfo(txHash: String, sender: Address?, withResults: Boolean): ElrondClient.ResponseBase<GetTransactionInfoResponse> {
+        val params = ArgFormatter().apply {
+            addArg(sender) { "sender=${it.bech32}" }
+            addArg(withResults) { "withResults=true" }
         }
-        return elrondClient.doGet("transaction/$txHash$senderAddress")
+        return elrondClient.doGet("transaction/$txHash$params")
     }
 
     fun getTransactionStatus(txHash: String, sender: Address?): ElrondClient.ResponseBase<GetTransactionStatusResponse> {
@@ -118,5 +118,27 @@ internal class ElrondProxy(
     fun getAllIssuedEsdt(): ElrondClient.ResponseBase<GetAllIssuedEsdtResponse> {
         return elrondClient.doGet("network/esdts")
     }
+
+    /** Private **/
+
+    private class ArgFormatter {
+        private var args = ""
+
+        fun <T> addArg(arg: T?, formatArg: (T) -> String) {
+            val prefix = when {
+                args.isEmpty() -> "?"
+                else -> "&"
+            }
+            args += when (arg){
+                null -> ""
+                else -> prefix + formatArg(arg)
+            }
+        }
+
+        override fun toString(): String {
+            return args
+        }
+    }
+
 
 }
