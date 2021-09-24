@@ -20,6 +20,7 @@ class TransferEsdtUsecase internal constructor(
         wallet: Wallet,
         networkConfig: NetworkConfig,
         gasPrice: Long,
+        extraGasLimit: Long? = null, // <an appropriate amount for the method call>
         receiver: Address,
         tokenIdentifier: String,
         valueToTransfer: BigInteger,
@@ -42,7 +43,7 @@ class TransferEsdtUsecase internal constructor(
                 sender = account.address,
                 receiver = receiver,
                 value = ESDT_TRANSACTION_VALUE,
-                gasLimit = 500000L, // TODO + <an appropriate amount for the method call>
+                gasLimit = 500000L + (extraGasLimit ?: 0L),
                 gasPrice = gasPrice,
                 data = args.fold("ESDTTransfer") { it1, it2 -> "$it1@$it2" },
                 chainID = networkConfig.chainID,
