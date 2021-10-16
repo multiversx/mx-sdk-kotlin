@@ -1,0 +1,3 @@
+rootProject.name = "ErdKotlin"
+include ':app'
+include ':erdkotlin'

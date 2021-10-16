@@ -1,0 +1,30 @@
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.java.srcDirs
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId pomGroupID
+                artifactId project.name
+                version pomVersion
+
+                from components.kotlin
+                artifact androidSourcesJar
+
+                pom {
+                    url = 'https://github.com/ElrondNetwork/elrond-sdk-erdkotlin'
+                    licenses {
+                        license {
+                            name = 'GNU GENERAL PUBLIC LICENSE'
+                            url = 'https://github.com/ElrondNetwork/elrond-sdk-erdkotlin/blob/main/LICENSE'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
