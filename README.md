@@ -106,9 +106,16 @@ ErdSdk.elrondHttpClientBuilder.apply {
 }
 ```
 
-## Build
-The SDK is not yet uploaded to a maven repository  
-You can build the jar from the sources by running `mvn package`
+## Download
+```
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation "com.github.ElrondNetwork:elrond-sdk-erdkotlin:0.6.0"
+}
+```
 
 ## Sample App
 For a complete example you can checkout this [sample application](https://github.com/Alexandre-saddour/ElrondKotlinSampleApp)
