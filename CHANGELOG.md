@@ -1,6 +1,15 @@
 Changelog
 ============
 
+## [0.6.0] - xx.xx.2021
+- ErdKotlin is now accessible as a gradle dependency
+- Model update
+  - Add `smartContractResults` field to `TransactionInfo` in order to handle `withResults=true` parameter for [transaction/:txHash](https://docs.elrond.com/sdk-and-tools/rest-api/transactions/#get-transaction)
+  - Add `timestamp` field to `TransactionInfo`
+  - Remove `scResults` from the response of [address/:bech32Address/transactions](https://docs.elrond.com/sdk-and-tools/rest-api/addresses/#get-address-transactions) since it is not returned anymore.
+- add `extraGasLimit` parameter  to `TransferEsdtUsecase` allowing to add extra gas when interacting with a smartcontract.
+- Automatically decode the data field from `TransactionInfo` and `TransactionOnNetwork`
+
 ## [0.5.0] - 30.06.2021
 - implement ESDT API
   - Get all ESDT tokens for an address
