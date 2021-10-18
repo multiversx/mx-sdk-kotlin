@@ -1,6 +1,17 @@
 Changelog
 ============
 
+## [0.5.0] - 30.06.2021
+- implement ESDT API
+  - Get all ESDT tokens for an address
+  - Get balance for an address and an ESDT token
+  - Get all issued ESDT tokens
+  - Get ESDT token properties
+  - Get special roles for a token
+- implement ESDT management calls (issue, mint, burn, etc..)
+- Address.bech32() -> Address.bech32 
+- Address.pubkey() -> Address.pubKey
+
 ## [0.4.0] - 28.05.2021
 - implement QueryContractHexUsecase -> equivalent to `vm-values/hex` 
 - implement QueryContractStringUsecase -> equivalent to `vm-values/string`
