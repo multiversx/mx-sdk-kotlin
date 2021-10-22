@@ -1,6 +1,6 @@
 
 ext {
-    pomVersion = '0.5.1'
+    pomVersion = '0.6.0'
     pomGroupID = "com.elrond.erdkotlin"
 }
 
