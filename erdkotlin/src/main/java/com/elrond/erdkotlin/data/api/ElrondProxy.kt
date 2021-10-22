@@ -66,10 +66,10 @@ internal class ElrondProxy(
         return elrondClient.doPost("transaction/cost", transaction.serialize())
     }
 
-    fun getTransactionInfo(txHash: String, sender: Address?, withResults: Boolean): ElrondClient.ResponseBase<GetTransactionInfoResponse> {
+    fun getTransactionInfo(txHash: String, sender: Address?, withResults: Boolean?): ElrondClient.ResponseBase<GetTransactionInfoResponse> {
         val params = ArgFormatter().apply {
             addArg(sender) { "sender=${it.bech32}" }
-            addArg(withResults) { "withResults=true" }
+            addArg(withResults) { "withResults=$it" }
         }
         return elrondClient.doGet("transaction/$txHash$params")
     }

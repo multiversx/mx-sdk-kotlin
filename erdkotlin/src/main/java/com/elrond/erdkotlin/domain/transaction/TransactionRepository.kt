@@ -34,7 +34,7 @@ internal interface TransactionRepository {
         Exceptions.CannotSerializeTransactionException::class,
         Exceptions.ProxyRequestException::class
     )
-    fun getTransactionInfo(txHash: String, sender: Address?, withResults: Boolean): TransactionInfo
+    fun getTransactionInfo(txHash: String, sender: Address?, withResults: Boolean?): TransactionInfo
 
     @Throws(
         IOException::class,

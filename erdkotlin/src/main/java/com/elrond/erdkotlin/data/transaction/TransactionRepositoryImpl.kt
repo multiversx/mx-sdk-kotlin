@@ -32,7 +32,7 @@ internal class TransactionRepositoryImpl(
         return requireNotNull(response.data).txGasUnits
     }
 
-    override fun getTransactionInfo(txHash: String, sender: Address?, withResults: Boolean): TransactionInfo {
+    override fun getTransactionInfo(txHash: String, sender: Address?, withResults: Boolean?): TransactionInfo {
         val response = elrondProxy.getTransactionInfo(txHash, sender, withResults)
         return requireNotNull(response.data).transaction.toDomain(txHash)
     }
