@@ -28,7 +28,6 @@ data class TransactionInfo(
     val hyperblockNonce: Long?,
     val smartContractResults: List<ScResult>?
 ) {
-
     data class ScResult(
         val hash: String?,
         val nonce: Long,
@@ -42,5 +41,4 @@ data class TransactionInfo(
         val gasPrice: Long,
         val callType: String
     )
-
 }

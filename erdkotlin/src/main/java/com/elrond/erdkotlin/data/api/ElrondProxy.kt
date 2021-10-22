@@ -139,6 +139,4 @@ internal class ElrondProxy(
             return args
         }
     }
-
-
 }
