@@ -1,7 +1,7 @@
 Changelog
 ============
 
-## [0.6.0] - xx.xx.2021
+## [0.6.0] - 22.10.2021
 - ErdKotlin is now accessible as a gradle dependency
 - Model update
   - Add `smartContractResults` field to `TransactionInfo` in order to handle `withResults=true` parameter for [transaction/:txHash](https://docs.elrond.com/sdk-and-tools/rest-api/transactions/#get-transaction)
